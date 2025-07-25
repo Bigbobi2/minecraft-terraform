@@ -5,20 +5,19 @@ provider "aws" {
 resource "aws_security_group" "minecraft_sg" {
   name        = "minecraft-sg"
   description = "Allow Minecraft and SSH access"
-  vpc_id      = "vpc-0e6833a46b3dd57cc"  # ✅ Your VPC
+  vpc_id      = "vpc-0e6833a46b3dd57cc" 
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # SSH
-  }
+    cidr_blocks = ["0.0.0.0/0"] 
 
   ingress {
     from_port   = 25565
     to_port     = 25565
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Minecraft
+    cidr_blocks = ["0.0.0.0/0"] 
   }
 
   egress {
@@ -30,8 +29,8 @@ resource "aws_security_group" "minecraft_sg" {
 }
 
 resource "aws_instance" "minecraft_server" {
-  ami                    = "ami-0dc0ac921efee9f9d"  # Ubuntu 22.04 LTS
-  instance_type          = "t2.micro"               # ✅ Free Tier
+  ami                    = "ami-0dc0ac921efee9f9d" 
+  instance_type          = "t2.micro"               
   key_name               = "test"
   vpc_security_group_ids = [aws_security_group.minecraft_sg.id]
 
@@ -56,7 +55,7 @@ resource "aws_instance" "minecraft_server" {
 
               chown -R ubuntu:ubuntu /home/ubuntu/minecraft
 
-              # Less RAM for Free Tier
+             
               sudo -u ubuntu screen -dmS minecraft bash -c 'cd /home/ubuntu/minecraft && java -Xmx800M -Xms800M -jar paper.jar nogui'
               EOF
 }
