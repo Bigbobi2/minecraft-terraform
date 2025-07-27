@@ -5,14 +5,21 @@ provider "aws" {
 resource "aws_security_group" "minecraft_sg" {
   name        = "minecraft-sg"
   description = "Allow Minecraft and SSH access"
+<<<<<<< HEAD
   vpc_id      = "vpc-0e6833a46b3dd57cc"  # 	TESTTEST
+=======
+  vpc_id      = "vpc-0e6833a46b3dd57cc" 
+>>>>>>> e09e954f1f907ce5dfe6f1ed06e6e3536b92f0f7
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] 
+<<<<<<< HEAD
   }
+=======
+>>>>>>> e09e954f1f907ce5dfe6f1ed06e6e3536b92f0f7
 
   ingress {
     from_port   = 25565
@@ -30,8 +37,13 @@ resource "aws_security_group" "minecraft_sg" {
 }
 
 resource "aws_instance" "minecraft_server" {
+<<<<<<< HEAD
   ami                    = "ami-0dc0ac921efee9f9d"  
   instance_type          = "t2.micro"              
+=======
+  ami                    = "ami-0dc0ac921efee9f9d" 
+  instance_type          = "t2.micro"               
+>>>>>>> e09e954f1f907ce5dfe6f1ed06e6e3536b92f0f7
   key_name               = "test"
   vpc_security_group_ids = [aws_security_group.minecraft_sg.id]
 
@@ -56,6 +68,10 @@ resource "aws_instance" "minecraft_server" {
 
               chown -R ubuntu:ubuntu /home/ubuntu/minecraft
 
+<<<<<<< HEAD
+=======
+             
+>>>>>>> e09e954f1f907ce5dfe6f1ed06e6e3536b92f0f7
               sudo -u ubuntu screen -dmS minecraft bash -c 'cd /home/ubuntu/minecraft && java -Xmx800M -Xms800M -jar paper.jar nogui'
               EOF
 }
